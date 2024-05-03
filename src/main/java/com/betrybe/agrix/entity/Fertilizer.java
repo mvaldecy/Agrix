@@ -43,5 +43,45 @@ public class Fertilizer {
     this.composition = composition;
   }
 
+  public List<Crop> getCrops() {
+    return this.crops;
+  }
+
+  public void setCrops(List<Crop> crops) {
+    this.crops = crops;
+  }
+
+  public Long getId() {
+    return this.id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getName() {
+    return this.name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getBrand() {
+    return this.brand;
+  }
+
+  public void setBrand(String brand) {
+    this.brand = brand;
+  }
+
+  public String getComposition() {
+    return this.composition;
+  }
+
+  public void setComposition(String composition) {
+    this.composition = composition;
+  }
+
     
 }

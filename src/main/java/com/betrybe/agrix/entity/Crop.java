@@ -52,6 +52,14 @@ public class Crop {
     this.farm = farm;
   }
 
+  public List<Fertilizer> getFertilizers() {
+    return this.fertilizers;
+  }
+
+  public void setFertilizers(List<Fertilizer> fertilizers) {
+    this.fertilizers = fertilizers;
+  }
+
   public LocalDate getPlantedDate() {
     return plantedDate;
   }
