@@ -66,14 +66,21 @@ public class FarmService {
     Farm farm = new Farm(farmDto.name(), farmDto.size());
     farm.setId(farmDto.id());
     Crop newCrop = new Crop();
-    newCrop.setFarm(farm);
     newCrop.setName(cropBody.name());
     newCrop.setPlantedArea(cropBody.plantedArea());
+    newCrop.setPlantedDate(cropBody.plantedDate());
+    newCrop.setHarvestDate(cropBody.harvestDate());
+    newCrop.setFarm(farm);
+
     Crop createdCrop = cropRepository.save(newCrop);
-    return new CropDto(createdCrop.getId(),
-    createdCrop.getName(),
-    createdCrop.getPlantedArea(),
-    createdCrop.getFarm().getId());
+    CropDto cropResponse = new CropDto(createdCrop.getId(),
+        createdCrop.getName(),
+        createdCrop.getPlantedArea(),
+        createdCrop.getPlantedDate(),
+        createdCrop.getHarvestDate(),
+        farmId
+    );
+    return cropResponse;
   }
 
   /**
@@ -92,7 +99,8 @@ public class FarmService {
    */
   public List<CropDto> getAllCrops() {
     List<Crop> crops = cropRepository.findAll();
-    List<CropDto> cropDtoList = DtoConversor.cropModelToDto(crops);
+    List<CropDto> cropDtoList = crops.stream()
+        .map((crop) -> DtoConversor.cropModelToDto(crop)).toList();
     return cropDtoList;
   }
 

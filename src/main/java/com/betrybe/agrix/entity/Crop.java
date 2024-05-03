@@ -44,19 +44,7 @@ public class Crop {
   /**
    * Crop constructor.
    */
-  public Crop(
-      String name,
-      Double plantedArea,
-      LocalDate plantedDate,
-      LocalDate harvestDate,
-      Farm farm
-  ) {
-    this.name = name;
-    this.plantedArea = plantedArea;
-    this.harvestDate = harvestDate;
-    this.plantedDate = plantedDate;
-    this.farm = farm;
-  }
+  
     
 
   public List<Fertilizer> getFertilizers() {
@@ -69,6 +57,10 @@ public class Crop {
 
   public LocalDate getPlantedDate() {
     return plantedDate;
+  }
+
+  public void setPlantedDate(LocalDate plantedDate) {
+    this.plantedDate = plantedDate;
   }
 
   public LocalDate getHarvestDate() {
