@@ -10,5 +10,5 @@ public record CropDto(
     String name,
     Double plantedArea,
     LocalDate plantedDate,
-    LocalDate harvestDat,
+    LocalDate harvestDate,
     Long farmId) {}
