@@ -13,7 +13,13 @@ public abstract class DtoConversor {
    */
   public static List<CropDto> cropModelToDto(List<Crop> cropList) {
     return cropList.stream()
-          .map((crop) -> new CropDto(crop.getId(),
-          crop.getName(), crop.getPlantedArea(), crop.getFarm().getId())).toList();
+          .map((crop) -> new CropDto(
+            crop.getId(),
+            crop.getName(),
+            crop.getPlantedArea(),
+            crop.getFarm().getId(),
+            crop.getPlantedDate(),
+            crop.getHarvestDate()
+            )).toList();
   }
 }

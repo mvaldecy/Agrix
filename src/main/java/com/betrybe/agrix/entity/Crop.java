@@ -44,13 +44,20 @@ public class Crop {
   /**
    * Crop constructor.
    */
-  public Crop(String name, Double plantedArea, LocalDate harvestDate, Farm farm) {
+  public Crop(
+      String name,
+      Double plantedArea,
+      LocalDate plantedDate,
+      LocalDate harvestDate,
+      Farm farm
+  ) {
     this.name = name;
     this.plantedArea = plantedArea;
     this.harvestDate = harvestDate;
-    this.plantedDate = LocalDate.now();
+    this.plantedDate = plantedDate;
     this.farm = farm;
   }
+    
 
   public List<Fertilizer> getFertilizers() {
     return this.fertilizers;
