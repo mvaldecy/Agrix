@@ -16,9 +16,9 @@ public abstract class DtoConversor {
             crop.getId(),
             crop.getName(),
             crop.getPlantedArea(),
-            crop.getFarm().getId(),
             crop.getPlantedDate(),
-            crop.getHarvestDate()
+            crop.getHarvestDate(),
+            crop.getFarm().getId()
             );
   }
 }

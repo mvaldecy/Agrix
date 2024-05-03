@@ -90,7 +90,8 @@ public class FarmService {
     this.getFarmById(id);
     List<Crop> crops = cropRepository.findAll()
           .stream().filter((crop) -> crop.getFarm().getId() == id).toList();
-    List<CropDto> cropDtoList = DtoConversor.cropModelToDto(crops);
+    List<CropDto> cropDtoList = crops.stream()
+        .map((crop) -> DtoConversor.cropModelToDto(crop)).toList();
     return cropDtoList;
   }
 
@@ -110,8 +111,14 @@ public class FarmService {
   public CropDto getCropById(Long id) {
     Crop crop = cropRepository.findById(id)
         .orElseThrow(CropNotFoundException::new);
-    CropDto cropDto = new CropDto(crop.getId(),
-        crop.getName(), crop.getPlantedArea(), crop.getFarm().getId());
-    return cropDto;
+    CropDto cropResponse = new CropDto(
+        crop.getId(),
+        crop.getName(),
+        crop.getPlantedArea(),
+        crop.getPlantedDate(),
+        crop.getHarvestDate(),
+        crop.getFarm().getId()
+    );
+    return cropResponse;
   }
 }
