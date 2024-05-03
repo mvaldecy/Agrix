@@ -32,5 +32,16 @@ public class Fertilizer {
       inverseJoinColumns = @JoinColumn(name = "crop_id"))
   private List<Crop> crops;
 
+  public Fertilizer() {}
+
+  /**
+   * Fertilizer constructor.
+   */
+  public Fertilizer(String name, String brand, String composition) {
+    this.name = name;
+    this.brand = brand;
+    this.composition = composition;
+  }
+
     
 }

@@ -1,5 +1,6 @@
 package com.betrybe.agrix.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,14 +27,42 @@ public class Crop {
   private Farm farm;
 
   private String name;
+  @Column(name = "planted_area")
   private Double plantedArea;
+
+  @Column(name = "planted_date")
   private LocalDate plantedDate;
-  private LocalDate harvesDate;
+
+  @Column(name = "harvest_date")
+  private LocalDate harvestDate;
 
   @ManyToMany(mappedBy = "crops")
   private List<Fertilizer> fertilizers;
 
   public Crop() {}
+
+  /**
+   * Crop constructor.
+   */
+  public Crop(String name, Double plantedArea, LocalDate harvestDate, Farm farm) {
+    this.name = name;
+    this.plantedArea = plantedArea;
+    this.harvestDate = harvestDate;
+    this.plantedDate = LocalDate.now();
+    this.farm = farm;
+  }
+
+  public LocalDate getPlantedDate() {
+    return plantedDate;
+  }
+
+  public LocalDate getHarvestDate() {
+    return this.harvestDate;
+  }
+
+  public void setHarvestDate(LocalDate harvestDate) {
+    this.harvestDate = harvestDate;
+  }
 
   public Long getId() {
     return this.id;
