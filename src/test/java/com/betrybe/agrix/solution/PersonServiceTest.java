@@ -79,4 +79,42 @@ public class PersonServiceTest {
     assertEquals(returnedPerson.getPassword(), personMock.getPassword());
     assertEquals(returnedPerson.getRole(), personMock.getRole());
   }
+
+  @Test
+  public void getPersonByUsernameNotFound() {
+    Mockito.when(personRepository.findByUsername(any()))
+        .thenReturn(Optional.empty());
+
+    assertThrows(PersonNotFoundException.class,
+        () -> personService.getPersonByUsername("Usuario inexistente"));
+    
+    Mockito.verify(personRepository).findByUsername("Usuario inexistente");
+  }
+
+  @Test
+  public void createPerson() {
+    Person person = new Person();
+    person.setPassword("senha");
+    person.setRole(Role.ADMIN);
+    person.setUsername("Marcos");
+
+    Person personToReturn = new Person();
+    personToReturn.setId(1L);
+    personToReturn.setPassword(person.getPassword());
+    personToReturn.setRole(person.getRole());
+    personToReturn.setUsername(person.getUsername());
+
+    Mockito.when(personRepository.save(any(Person.class))).thenReturn(personToReturn);
+
+    Person createdPerson = personService.create(person);
+
+    Mockito.verify(personRepository).save(any(Person.class));
+
+    assertEquals(1L, createdPerson.getId());
+    assertEquals("senha", createdPerson.getPassword());
+    assertEquals(Role.ADMIN, createdPerson.getRole());
+    assertEquals("Marcos", createdPerson.getUsername());
+
+  }
+  
 }
