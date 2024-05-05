@@ -11,6 +11,11 @@ import com.betrybe.agrix.repository.CropRepository;
 import com.betrybe.agrix.repository.FarmRepository;
 import com.betrybe.agrix.service.exception.CropNotFoundException;
 import com.betrybe.agrix.service.exception.FarmNotFoundException;
+import com.betrybe.agrix.utils.DateUtil;
+
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -120,5 +125,19 @@ public class FarmService {
         crop.getFarm().getId()
     );
     return cropResponse;
+  }
+
+  /**
+   * getCropByDate.
+   */
+  public List<CropDto> getCropByDate(String start, String end) {
+    LocalDate startDate = DateUtil.conversor(start);
+    LocalDate endDate = DateUtil.conversor(end);
+    List<CropDto> cropsResponse = this.getAllCrops()
+        .stream()
+        .filter((crop) -> 
+        crop.harvestDate().isAfter(startDate) && crop.harvestDate().isBefore(endDate)).toList();
+    return cropsResponse;
+    
   }
 }
