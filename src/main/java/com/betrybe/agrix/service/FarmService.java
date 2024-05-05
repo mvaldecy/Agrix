@@ -12,10 +12,7 @@ import com.betrybe.agrix.repository.FarmRepository;
 import com.betrybe.agrix.service.exception.CropNotFoundException;
 import com.betrybe.agrix.service.exception.FarmNotFoundException;
 import com.betrybe.agrix.utils.DateUtil;
-
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
