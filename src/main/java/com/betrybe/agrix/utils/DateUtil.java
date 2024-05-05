@@ -18,5 +18,5 @@ public abstract class DateUtil {
     CharSequence csDate = date;
     LocalDate dateResponse = LocalDate.parse(csDate, formatter);
     return dateResponse;
-    }
+  }
 }

@@ -3,9 +3,6 @@ package com.betrybe.agrix.dto;
 import com.betrybe.agrix.entity.Crop;
 import com.betrybe.agrix.entity.Fertilizer;
 
-import java.util.List;
-
-
 /**
  * DtoConversor.
  */
