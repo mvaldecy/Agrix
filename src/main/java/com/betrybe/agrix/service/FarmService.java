@@ -135,6 +135,5 @@ public class FarmService {
         .filter((crop) -> 
         crop.harvestDate().isAfter(startDate) && crop.harvestDate().isBefore(endDate)).toList();
     return cropsResponse;
-    
   }
 }
