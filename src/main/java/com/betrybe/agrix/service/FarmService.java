@@ -7,10 +7,13 @@ import com.betrybe.agrix.dto.FarmCreationDto;
 import com.betrybe.agrix.dto.FarmDto;
 import com.betrybe.agrix.entity.Crop;
 import com.betrybe.agrix.entity.Farm;
+import com.betrybe.agrix.entity.Fertilizer;
 import com.betrybe.agrix.repository.CropRepository;
 import com.betrybe.agrix.repository.FarmRepository;
+import com.betrybe.agrix.repository.FertilizerRepository;
 import com.betrybe.agrix.service.exception.CropNotFoundException;
 import com.betrybe.agrix.service.exception.FarmNotFoundException;
+import com.betrybe.agrix.service.exception.FertilizerNotFoundException;
 import com.betrybe.agrix.utils.DateUtil;
 import java.time.LocalDate;
 import java.util.List;
@@ -24,11 +27,16 @@ import org.springframework.stereotype.Service;
 public class FarmService {
   private final FarmRepository farmRepository;
   private final CropRepository cropRepository;
+  private final FertilizerRepository fertilizerRepository;
 
   @Autowired
-  public FarmService(FarmRepository farmRepository, CropRepository cropRepository) {
+  public FarmService(
+      FarmRepository farmRepository,
+      CropRepository cropRepository,
+      FertilizerRepository fertilizerRepository) {
     this.farmRepository = farmRepository;
     this.cropRepository = cropRepository;
+    this.fertilizerRepository = fertilizerRepository;
   }
 
   /**
@@ -135,5 +143,22 @@ public class FarmService {
         .filter((crop) -> 
         crop.harvestDate().isAfter(startDate) && crop.harvestDate().isBefore(endDate)).toList();
     return cropsResponse;
+  }
+
+  /**
+   * associate cropId and FertilizerId.
+   */
+  public String associateCropFertilizer(long cropId, Long fertilizerId) {
+    Crop crop = this.cropRepository.findById(cropId)
+            .orElseThrow(CropNotFoundException::new);
+    Fertilizer fertilizer = this.fertilizerRepository.findById(fertilizerId)
+            .orElseThrow(FertilizerNotFoundException::new);
+    List<Fertilizer> fertilizers = crop.getFertilizers();
+    fertilizers.add(fertilizer);
+    crop.setFertilizers(fertilizers);
+    List<Crop> crops = fertilizer.getCrops();
+    crops.add(crop);
+
+    return "Fertilizante e plantação associados com sucesso!";
   }
 }
