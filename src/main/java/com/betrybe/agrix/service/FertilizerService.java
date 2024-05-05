@@ -5,6 +5,7 @@ import com.betrybe.agrix.dto.FertilizerCreationDto;
 import com.betrybe.agrix.dto.FertilizerDto;
 import com.betrybe.agrix.entity.Fertilizer;
 import com.betrybe.agrix.repository.FertilizerRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,5 +30,15 @@ public class FertilizerService {
         DtoConversor.fertilizerCropToModel(fertilizer)
     );
     return DtoConversor.fertilizerModelToCrop(newFertilizer);
+  }
+
+  /**
+   * getFertilizers.
+   */
+  public List<FertilizerDto> getAllFertilizers() {
+    List<Fertilizer> fertilizersList = this.fertilizerRepository.findAll();
+    List<FertilizerDto> fertilizersDto = fertilizersList.stream()
+        .map((fertilizer) -> DtoConversor.fertilizerModelToCrop(fertilizer)).toList();
+    return fertilizersDto;
   }
 }
