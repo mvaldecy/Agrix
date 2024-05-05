@@ -5,6 +5,7 @@ import com.betrybe.agrix.dto.FertilizerCreationDto;
 import com.betrybe.agrix.dto.FertilizerDto;
 import com.betrybe.agrix.entity.Fertilizer;
 import com.betrybe.agrix.repository.FertilizerRepository;
+import com.betrybe.agrix.service.exception.FertilizerNotFoundException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,5 +41,14 @@ public class FertilizerService {
     List<FertilizerDto> fertilizersDto = fertilizersList.stream()
         .map((fertilizer) -> DtoConversor.fertilizerModelToCrop(fertilizer)).toList();
     return fertilizersDto;
+  }
+
+  /**
+   * GetFertilizerById.
+   */
+  public FertilizerDto getFertilizerById(Long id) {
+    Fertilizer fertilizer = this.fertilizerRepository.findById(id)
+            .orElseThrow(FertilizerNotFoundException::new);
+    return DtoConversor.fertilizerModelToCrop(fertilizer);
   }
 }

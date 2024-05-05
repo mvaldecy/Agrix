@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * FertilizerNotFoundException.
  */
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
-public abstract class FertilizerNotFoundException extends NotFoundException {
+public class FertilizerNotFoundException extends NotFoundException {
   public FertilizerNotFoundException() {
     super("Fertilizante não encontrado!");
   }
