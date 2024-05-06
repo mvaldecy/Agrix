@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * FertilizerRepository.
  */
-public interface FertilizerRepository extends JpaRepository<Fertilizer, Long> {
+public interface FertilizerRepository extends JpaRepository<Fertilizer, Integer> {
     
 }

@@ -46,7 +46,7 @@ public class FertilizerService {
   /**
    * GetFertilizerById.
    */
-  public FertilizerDto getFertilizerById(Long id) {
+  public FertilizerDto getFertilizerById(Integer id) {
     Fertilizer fertilizer = this.fertilizerRepository.findById(id)
             .orElseThrow(FertilizerNotFoundException::new);
     return DtoConversor.fertilizerModelToCrop(fertilizer);

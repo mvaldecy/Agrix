@@ -18,7 +18,7 @@ import java.util.List;
 public class Fertilizer {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+  private Integer id;
 
   private String name;
   private String brand;
@@ -27,8 +27,8 @@ public class Fertilizer {
   @ManyToMany
   @JoinTable(
       name = "crop_fertilizer",
-      joinColumns = @JoinColumn(name = "fertilizer_id"),
-      inverseJoinColumns = @JoinColumn(name = "crop_id"))
+      joinColumns = @JoinColumn(name = "crop_id"),
+      inverseJoinColumns = @JoinColumn(name = "fertilizer_id"))
   private List<Crop> crops;
 
   public Fertilizer() {}
@@ -50,11 +50,11 @@ public class Fertilizer {
     this.crops = crops;
   }
 
-  public Long getId() {
+  public Integer getId() {
     return this.id;
   }
 
-  public void setId(Long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 

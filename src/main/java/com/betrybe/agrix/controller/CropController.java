@@ -35,7 +35,7 @@ public class CropController {
   }
   
   @GetMapping("/{id}")
-  public ResponseEntity<CropDto> getCropById(@PathVariable Long id) {
+  public ResponseEntity<CropDto> getCropById(@PathVariable Integer id) {
     return ResponseEntity.status(HttpStatus.OK).body(farmService.getCropById(id));
   }
 
@@ -47,10 +47,10 @@ public class CropController {
     return ResponseEntity.status(HttpStatus.OK).body(farmService.getCropByDate(startDate, endDate));
   }
 
-  @PutMapping("/{cropId}/fertilizers/{fertilizerId}")
+  @PostMapping("/{cropId}/fertilizers/{fertilizerId}")
   public ResponseEntity<String> associateCropIdFertilizerid(
-      @PathVariable Long cropId,
-      @PathVariable Long fertilizerId
+      @PathVariable Integer cropId,
+      @PathVariable Integer fertilizerId
   ) {
     return ResponseEntity.status(HttpStatus.CREATED)
       .body(farmService.associateCropFertilizer(cropId, fertilizerId));
@@ -58,7 +58,7 @@ public class CropController {
 
   @GetMapping("/{id}/fertilizers")
   public ResponseEntity<List<FertilizerDto>> getCropFertilizers(
-      @PathVariable Long id
+      @PathVariable Integer id
   ) {
     return ResponseEntity.status(HttpStatus.OK)
       .body(this.farmService.getCropFertilizers(id));

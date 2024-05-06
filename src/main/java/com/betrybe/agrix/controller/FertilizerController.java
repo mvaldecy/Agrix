@@ -40,7 +40,7 @@ public class FertilizerController {
 
   @GetMapping(value = "/{id}")
   public ResponseEntity<FertilizerDto> getFertilizerById(
-        @PathVariable Long id
+        @PathVariable Integer id
   ) {
     return ResponseEntity.status(HttpStatus.OK).body(this.fertilizerService.getFertilizerById(id));
   }

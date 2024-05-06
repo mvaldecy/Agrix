@@ -122,7 +122,7 @@ public class FarmService {
   /**
    * getCropById.
    */
-  public CropDto getCropById(Long id) {
+  public CropDto getCropById(Integer id) {
     Crop crop = cropRepository.findById(id)
         .orElseThrow(CropNotFoundException::new);
     CropDto cropResponse = new CropDto(
@@ -152,16 +152,13 @@ public class FarmService {
   /**
    * associate cropId and FertilizerId.
    */
-  public String associateCropFertilizer(long cropId, Long fertilizerId) {
+  public String associateCropFertilizer(Integer cropId, Integer fertilizerId) {
     Crop crop = this.cropRepository.findById(cropId)
             .orElseThrow(CropNotFoundException::new);
     Fertilizer fertilizer = this.fertilizerRepository.findById(fertilizerId)
             .orElseThrow(FertilizerNotFoundException::new);
-    List<Fertilizer> fertilizers = crop.getFertilizers();
-    fertilizers.add(fertilizer);
-    crop.setFertilizers(fertilizers);
-    List<Crop> crops = fertilizer.getCrops();
-    crops.add(crop);
+    fertilizer.getCrops().add(crop);
+    fertilizerRepository.save(fertilizer);
 
     return "Fertilizante e plantação associados com sucesso!";
   }
@@ -169,7 +166,7 @@ public class FarmService {
   /**
    * getCropFertilizer.
    */
-  public List<FertilizerDto> getCropFertilizers(Long id) {
+  public List<FertilizerDto> getCropFertilizers(Integer id) {
     Crop crop = this.cropRepository.findById(id)
           .orElseThrow(CropNotFoundException::new);
     List<FertilizerDto> fertilizers = crop.getFertilizers()
