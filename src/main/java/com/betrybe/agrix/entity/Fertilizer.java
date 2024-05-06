@@ -27,9 +27,11 @@ public class Fertilizer {
   @ManyToMany
   @JoinTable(
       name = "crop_fertilizer",
-      joinColumns = @JoinColumn(name = "crop_id"),
-      inverseJoinColumns = @JoinColumn(name = "fertilizer_id"))
+      joinColumns = @JoinColumn(name = "fertilizer_id"),
+      inverseJoinColumns = @JoinColumn(name = "crop_id"))
   private List<Crop> crops;
+
+  public Fertilizer() {}
 
   /**
    * Fertilizer constructor.
