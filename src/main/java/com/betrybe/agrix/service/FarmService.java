@@ -5,6 +5,7 @@ import com.betrybe.agrix.dto.CropDto;
 import com.betrybe.agrix.dto.DtoConversor;
 import com.betrybe.agrix.dto.FarmCreationDto;
 import com.betrybe.agrix.dto.FarmDto;
+import com.betrybe.agrix.dto.FertilizerDto;
 import com.betrybe.agrix.entity.Crop;
 import com.betrybe.agrix.entity.Farm;
 import com.betrybe.agrix.entity.Fertilizer;
@@ -29,6 +30,9 @@ public class FarmService {
   private final CropRepository cropRepository;
   private final FertilizerRepository fertilizerRepository;
 
+  /**
+   * FarmService constructor.
+   */
   @Autowired
   public FarmService(
       FarmRepository farmRepository,
@@ -160,5 +164,17 @@ public class FarmService {
     crops.add(crop);
 
     return "Fertilizante e plantação associados com sucesso!";
+  }
+
+  /**
+   * getCropFertilizer.
+   */
+  public List<FertilizerDto> getCropFertilizers(Long id) {
+    Crop crop = this.cropRepository.findById(id)
+          .orElseThrow(CropNotFoundException::new);
+    List<FertilizerDto> fertilizers = crop.getFertilizers()
+        .stream()
+        .map((i) -> DtoConversor.fertilizerModelToCrop(i)).toList();
+    return fertilizers;
   }
 }

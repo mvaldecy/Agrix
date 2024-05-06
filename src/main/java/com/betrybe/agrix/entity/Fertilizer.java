@@ -10,7 +10,6 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
-
 /**
  * Fertilizer entity.
  */
@@ -28,11 +27,9 @@ public class Fertilizer {
   @ManyToMany
   @JoinTable(
       name = "crop_fertilizer",
-      joinColumns = @JoinColumn(name = "fertilizer_id"),
-      inverseJoinColumns = @JoinColumn(name = "crop_id"))
+      joinColumns = @JoinColumn(name = "crop_id"),
+      inverseJoinColumns = @JoinColumn(name = "fertilizer_id"))
   private List<Crop> crops;
-
-  public Fertilizer() {}
 
   /**
    * Fertilizer constructor.
